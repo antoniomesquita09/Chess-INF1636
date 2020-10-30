@@ -13,7 +13,7 @@ public class main {
 		play playInstance = play.getInstance();
 		// playInstance.selectField('p', "black", 1, 0, 2, 0)
 		
-		System.out.printf("Move: %b\n",  playInstance.selectField('b', "white", 7, 2, 5, 0));
+		System.out.printf("Move: %b\n",  playInstance.selectField('a', "white", 3, 3, 2, 4));
 		return;
 	}
 }

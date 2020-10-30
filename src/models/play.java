@@ -31,7 +31,7 @@ public class play {
 		}
 		if (piece == 'r' || piece == 'R') {
 			rook rookInstace = rook.getInstance();
-			// TODO: rookInstace.move(player, row, column, rowDestination, columnDestination);
+			return rookInstace.move(player, row, column, rowDestination, columnDestination);
 		}
 		if (piece == 'b' || piece == 'B') {
 			bishop bishopInstance = bishop.getInstance();
@@ -39,15 +39,15 @@ public class play {
 		}
 		if (piece == 'k' || piece == 'K') { // Knight
 			knight knigthInstance = knight.getInstance();
-			// TODO: knigthInstance.move(player, row, column, rowDestination, columnDestination);
+			return knigthInstance.move(player, row, column, rowDestination, columnDestination);
 		}
 		if (piece == 'q' || piece == 'Q') {
 			queen queenInstance = queen.getInstance();
-			// TODO: queenInstance.move(player, row, column, rowDestination, columnDestination);
+			return queenInstance.move(player, row, column, rowDestination, columnDestination);
 		}
 		if (piece == 'a' || piece == 'A') { // King
 			king kingInstance = king.getInstance();
-			// TODO: kingInstance.move(player, row, column, rowDestination, columnDestination);
+			return kingInstance.move(player, row, column, rowDestination, columnDestination);
 		}
 		return false;
 	}
