@@ -1,20 +1,20 @@
 package models;
 
-public class peao {
-	private static peao single_instance = null;
+public class pawn {
+	private static pawn single_instance = null;
 	
-	private peao() {
+	private pawn() {
 	}
 	
-	public static peao getInstance() {
+	public static pawn getInstance() {
 		if (single_instance == null)
-			single_instance = new peao();
+			single_instance = new pawn();
 		return single_instance;
 	}
 	
 	public boolean move(String player, int row, int column, int rowDestination, int columnDestination) {
-		tabuleiro chess = tabuleiro.getInstance();
-		char destinationField = chess.tabuleiro[rowDestination][columnDestination];
+		board boardInstance = board.getInstance();
+		char destinationField = boardInstance.board[rowDestination][columnDestination];
 		boolean emptyDestinationField = destinationField == ' ';
 		if (player == "white") {
 			boolean filledByAlly = Character.isUpperCase(destinationField); // or empty field

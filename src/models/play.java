@@ -13,8 +13,8 @@ public class play {
 	}
 	
 	public boolean selectPiece(String player, int row, int column) {
-		tabuleiro chess = tabuleiro.getInstance();
-		char field = chess.tabuleiro[row][column];
+		board boardInstance = board.getInstance();
+		char field = boardInstance.board[row][column];
 		boolean filledByAlly = false;
 		if (player == "white") {
 			filledByAlly = Character.isUpperCase(field);
@@ -26,8 +26,28 @@ public class play {
 	
 	public boolean selectField(char piece, String player, int row, int column, int rowDestination, int columnDestination) {
 		if (piece == 'p' || piece == 'P') {
-			peao pawn = peao.getInstance();
-			pawn.move(player, row, column, rowDestination, columnDestination);
+			pawn pawnInstance = pawn.getInstance();
+			return pawnInstance.move(player, row, column, rowDestination, columnDestination);
+		}
+		if (piece == 'r' || piece == 'R') {
+			rook rookInstace = rook.getInstance();
+			// TODO: rookInstace.move(player, row, column, rowDestination, columnDestination);
+		}
+		if (piece == 'b' || piece == 'B') {
+			bishop bishopInstance = bishop.getInstance();
+			// TODO: bishopInstance.move(player, row, column, rowDestination, columnDestination);
+		}
+		if (piece == 'k' || piece == 'K') { // Knight
+			knight knigthInstance = knight.getInstance();
+			// TODO: knigthInstance.move(player, row, column, rowDestination, columnDestination);
+		}
+		if (piece == 'q' || piece == 'Q') {
+			queen queenInstance = queen.getInstance();
+			// TODO: queenInstance.move(player, row, column, rowDestination, columnDestination);
+		}
+		if (piece == 'a' || piece == 'A') { // King
+			king kingInstance = king.getInstance();
+			// TODO: kingInstance.move(player, row, column, rowDestination, columnDestination);
 		}
 		return false;
 	}

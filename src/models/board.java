@@ -1,8 +1,8 @@
 package models;
 
-public class tabuleiro {
-	private static tabuleiro single_instance = null;
-	public char[][] tabuleiro = {
+public class board {
+	private static board single_instance = null;
+	public char[][] board = {
 			{'r','k','b','q','a','b','k','r'},
 	        {'p','p','p','p','p','p','p','p'},
 	        {' ',' ',' ',' ',' ',' ',' ',' '},
@@ -12,9 +12,9 @@ public class tabuleiro {
 	        {'P','P','P','P','P','P','P','P'},
 	        {'R','K','B','Q','A','B','K','R'}};
 	
-	public static synchronized tabuleiro getInstance() {
+	public static synchronized board getInstance() {
 		if (single_instance == null)
-			single_instance = new tabuleiro();
+			single_instance = new board();
 		return single_instance;
 	}
 }
