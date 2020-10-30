@@ -35,7 +35,7 @@ public class play {
 		}
 		if (piece == 'b' || piece == 'B') {
 			bishop bishopInstance = bishop.getInstance();
-			// TODO: bishopInstance.move(player, row, column, rowDestination, columnDestination);
+			return bishopInstance.move(player, row, column, rowDestination, columnDestination);
 		}
 		if (piece == 'k' || piece == 'K') { // Knight
 			knight knigthInstance = knight.getInstance();
