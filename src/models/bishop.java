@@ -1,54 +1,76 @@
 package models;
 
-public class bishop {
-	private static bishop single_instance = null;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Bishop extends Piece {
+	List<Tile> possibleMoviments;
+	Tile[][] board;
+	Piece piece;
+	Piece temp;
 	
-	private bishop() {
+	Bishop(PlayerColor color) {
+		super(color, new File("Pecas/Pecas_1/" + (color == PlayerColor.WHITE ? "b_bispo.gif" : "p_bispo.gif")));
 	}
 	
-	public static bishop getInstance() {
-		if (single_instance == null)
-			single_instance = new bishop();
-		return single_instance;
+	public List<Tile> getPossibleMoviments(Tile tile) {
+		possibleMoviments = new ArrayList<Tile>();
+		board = Board.getInstance().getBoardTiles();
+		
+		int row = tile.getRow();
+		int column = tile.getColumn();
+		
+		piece = board[row][column].getPiece();
+		
+		int i = row - 1; int j = column - 1;
+		while(i >= 0 && j >= 0){
+			if(addPossibleMoviment(i, j, row, column) == 0) break;
+			i--; j--;
+		}
+		
+		i = row-1; j = column+1;
+		while(i>=0 && j<=7){
+			if(addPossibleMoviment(i, j, row, column) == 0) break;
+			i--; j++;
+		}
+		
+		i = row+1; j = column-1;
+		while(i<=7 && j>=0){
+			if(addPossibleMoviment(i, j, row, column) == 0) break;
+			i++; j--;
+		}
+		
+		i = row+1; j = column+1;
+		while(i<=7 && j<=7){
+			if(addPossibleMoviment(i, j, row, column) == 0) break;
+			i++; j++;
+		}
+		
+		return possibleMoviments;
 	}
 	
-	public boolean move(String player, int row, int column, int rowDestination, int columnDestination) {
-		board boardInstance = board.getInstance();
-		char destinationField = boardInstance.board[rowDestination][columnDestination];
-		boolean incrementRow = rowDestination > row;
-		boolean incrementColumn = columnDestination > column;
-		boolean diagonal = Math.abs(row - rowDestination) == Math.abs(column - columnDestination);
-
-		if(!diagonal) return false;
-
-		int a = -1;
-		int b = -1;
-
-		if(incrementRow) {
-			 a = 1;
-		}
-		if(incrementColumn) {
-			 b = 1;
-		}
-
-		// Move diagonal logic (no obstacle)
-		for(int i = row + a; Math.abs(i - rowDestination) > 0; i = i + a) {
-			for(int j = column + b; Math.abs(j - columnDestination) > 0; j = j + b) {
-				boolean filledField = boardInstance.board[i][j] != ' ';
-				if(filledField) {
-					return false;
-				}
-			}	
+	private int addPossibleMoviment(int i, int j, int row, int column){
+		PlayerColor player = Board.getInstance().getPlayerTurn();
+		Tile tile = board[i][j];
+		temp = tile.getPiece();
+		
+		if(player == piece.getColor()){
+			tile.setPiece(piece);
+			tile.setPiece(null);
+			
+			tile.setPiece(temp);
+			board[row][column].setPiece(piece);
 		}
 		
-		// Kill destination field piece logic
-		if (player == "white") {
-			System.out.printf("destination field: %c\n", destinationField);
-			boolean filledByAlly = Character.isUpperCase(destinationField); // or empty field
-			return !filledByAlly;
+		if(temp != null){
+			if(temp.getColor() != piece.getColor()){
+				this.possibleMoviments.add(tile);
+			}
+			return 0;
 		}
+		this.possibleMoviments.add(tile);
+		return 1;
 		
-		boolean filledByAlly = Character.isLowerCase(destinationField); // or empty field
-		return !filledByAlly;
 	}
 }

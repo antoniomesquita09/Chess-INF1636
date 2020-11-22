@@ -1,37 +1,91 @@
 package models;
 
-public class king {
-	private static king single_instance = null;
-	
-	private king() {
-	}
-	
-	public static king getInstance() {
-		if (single_instance == null)
-			single_instance = new king();
-		return single_instance;
-	}
-	
-	public boolean move(String player, int row, int column, int rowDestination, int columnDestination) {
-		board boardInstance = board.getInstance();
-		char destinationField = boardInstance.board[rowDestination][columnDestination];
-		boolean condition1 = (Math.abs(row - rowDestination) == 1) && (column == columnDestination);
-		boolean condition2 = (Math.abs(column - columnDestination) == 1) && (row == rowDestination);
-		boolean oneSquareStraight = condition1 || condition2;
-		boolean oneSquarediagonal = (Math.abs(row - rowDestination) == 1) && (Math.abs(column - columnDestination) == 1);
-		boolean kingMove = oneSquareStraight || oneSquarediagonal;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+
+public class King extends Piece {
+	List<Tile> possibleMoviments;
+	Tile[][] board;
+	Piece piece;
+	Piece temp;
 		
-		if(!kingMove) return false;
+	King(PlayerColor color) {
+		super(color, new File("Pecas/Pecas_1/" + (color == PlayerColor.WHITE ? "b_rei.gif" : "p_rei.gif")));
+	}
+
+	
+	public List<Tile> getPossibleMoviments(Tile tile) {
+		possibleMoviments = new ArrayList<Tile>();
+		board = Board.getInstance().getBoardTiles();
 		
-		// Kill destination field piece logic
-		if (player == "white") {
-			System.out.printf("destination field: %c\n", destinationField);
-			boolean filledByAlly = Character.isUpperCase(destinationField); // or empty field
-			return !filledByAlly;
+		int row = tile.getRow();
+		int column = tile.getColumn();
+		
+		piece = board[row][column].getPiece();
+		
+		int i; int j; int y; int z;
+		
+		for(y = -1; y <= 1; y++){
+			z = 1;
+			i = row + z; j = column + y;
+			addPossibleMoviment(i, j, row, column);
+			i = row - z;
+			addPossibleMoviment(i, j, row, column);
 		}
-				
-		boolean filledByAlly = Character.isLowerCase(destinationField); // or empty field
-		return !filledByAlly;
+		y=1;
+		for(z = 0; z<=1; z++){
+			i = row; j = column + y;
+			addPossibleMoviment(i, j, row, column);
+			y=y*(-1);
+		}
+		
+		return possibleMoviments;
+	}
+	
+	private void addPossibleMoviment(int i, int j, int row, int column){
+		Tile tile = board[i][j];
+		if(i >= 0 && i <= 7 && j >= 0 && j <= 7){
+				temp = tile.getPiece();
+				tile.setPiece(new Pawn(this.piece.getColor()));
+				board[row][column].setPiece(null);
+				for(Tile[] tileList: board){
+					for(Tile t: tileList){
+						Piece piece = t.getPiece();
+						if(piece != null){
+							if(piece.getColor() != this.piece.getColor()){
+								if(piece instanceof King){
+									if(t.getRow()<=i+1 && t.getRow()>=i-1 && t.getColumn()<=j+1 && t.getColumn()>=j-1){
+										board[i][j].setPiece(temp);
+										board[row][column].setPiece(this.piece);
+										return;
+									}
+								}
+								List<Tile> optionsTemp = piece.getPossibleMoviments(t);
+								for(Tile option: optionsTemp){
+									if(option == tile){
+										tile.setPiece(temp);
+										board[row][column].setPiece(this.piece);
+										return;
+									}
+								}
+							}
+						}
+					}
+				}
 			
+			if(temp != null){
+				if(temp.getColor() != this.piece.getColor()){
+					possibleMoviments.add(tile);
+				}
+			}else{
+				possibleMoviments.add(tile);
+			}
+			tile.setPiece(temp);
+			board[row][column].setPiece(this.piece);
+		}
 	}
 }

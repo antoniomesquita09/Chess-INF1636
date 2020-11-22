@@ -1,19 +1,10 @@
+import models.Board;
+import models.Facade;
 
-import models.board;
-import models.play;
-
-public class main {
-	boolean playerA = true;
-	
+public class Main {	
 	public static void main(String []args) {
-		// board boardInstance = board.getInstance();
-		// [row][column]
-		// chess.board[0][3] = "p";
-		// char piece = boardInstance.board[1][0];
-		play playInstance = play.getInstance();
-		// playInstance.selectField('p', "black", 1, 0, 2, 0)
-		
-		System.out.printf("Move: %b\n",  playInstance.selectField('a', "white", 3, 3, 2, 4));
-		return;
+		Board board = Board.getInstance();
+		board.init();
+		Facade.getInstance().initBoardFrame(board);
 	}
 }

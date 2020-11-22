@@ -1,65 +1,75 @@
 package models;
 
-public class rook {
-	private static rook single_instance = null;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Rook extends Piece {
+	List<Tile> possibleMoviments;
+	Tile[][] board;
+	Piece piece;
+	Piece temp;
 	
-	private rook() {
-	}
-	
-	public static rook getInstance() {
-		if (single_instance == null)
-			single_instance = new rook();
-		return single_instance;
+	Rook(PlayerColor color) {
+		super(color, new File("Pecas/Pecas_1/" + (color == PlayerColor.WHITE ? "b_torre.gif" : "p_torre.gif")));
 	}
 
-	public boolean move(String player, int row, int column, int rowDestination, int columnDestination) {
-		board boardInstance = board.getInstance();
-		char destinationField = boardInstance.board[rowDestination][columnDestination];
-		boolean rowStraight = row == rowDestination;
-		boolean columnStraight = column == columnDestination;
-		boolean straight = rowStraight||columnStraight;
-		boolean incrementColumn = columnDestination > column;
-		boolean incrementRow = rowDestination > row;
+	public List<Tile> getPossibleMoviments(Tile tile) {
+		possibleMoviments = new ArrayList<Tile>();
+		board = Board.getInstance().getBoardTiles();
 		
-		if(!straight) return false;
+		int row = tile.getRow();
+		int column = tile.getColumn();
 		
-		int a = -1;
-		int b = -1;
+		piece = board[row][column].getPiece();
 		
-		if(incrementRow) {
-			 a = 1;
+		int i; int j;
+		
+		i = row-1; j = column;
+		while(i>=0) {
+			if(addPossibleMoviment(i, j, row, column) == 0){break;}
+			i--;
 		}
-		if(incrementColumn) {
-			 b = 1;
+		
+		i = row+1; j = column;
+		while(i <= 7) {
+			if(addPossibleMoviment(i, j, row, column) == 0){break;}
+			i++;
 		}
-		// Move straight logic (no obstacle)
-		if(rowStraight) {
-			for(int j = column + b; Math.abs(j - columnDestination) > 0; j = j + b) {
-				boolean filledField = boardInstance.board[row][j] != ' ';
-				if(filledField) {
-					return false;
-				}
+		
+		i = row; j = column-1;
+		while(j>=0) {
+			if(addPossibleMoviment(i, j, row, column) == 0){break;}
+			j--;
+		}
+		
+		i = row; j = column+1;
+		while(j<=7) {
+			if(addPossibleMoviment(i, j, row, column) == 0){break;}
+			j++;
+		}
+			
+		return possibleMoviments;
+	}
+	
+	private int addPossibleMoviment(int i, int j, int row, int column){
+		Tile tile = board[i][j];
+		if(Board.getInstance().getPlayerTurn() == piece.getColor()){
+			temp = tile.getPiece();
+			tile.setPiece(piece);
+			board[row][column].setPiece(null);
+			tile.setPiece(temp);
+			board[row][column].setPiece(piece);
+		}
+		
+		if(tile.getPiece() != null){
+			if(tile.getPiece().getColor() != piece.getColor()){
+				this.possibleMoviments.add(tile);
 			}
+			return 0;
 		}
+		this.possibleMoviments.add(tile);
+		return 1;
 		
-		// Move straight logic (no obstacle)
-		if(columnStraight) {
-			for(int i = row + a; Math.abs(i - rowDestination) > 0; i = i + a) {
-				boolean filledField = boardInstance.board[i][column] != ' ';
-				if(filledField) {
-					return false;
-				}
-			}
-		}
-		
-		// Kill destination field piece logic
-		if (player == "white") {
-			System.out.printf("destination field: %c\n", destinationField);
-			boolean filledByAlly = Character.isUpperCase(destinationField); // or empty field
-			return !filledByAlly;
-		}
-				
-		boolean filledByAlly = Character.isLowerCase(destinationField); // or empty field
-		return !filledByAlly;
 	}
 }
