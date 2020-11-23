@@ -13,7 +13,7 @@ import models.Board;
 import models.Facade;
 import models.Tile;
 
-public class BoardFrame extends JFrame implements Observer {
+public class BoardFrame extends JFrame {
 	
 	private static BoardFrame singleInstance = null;
 	
