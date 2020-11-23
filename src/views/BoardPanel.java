@@ -28,10 +28,7 @@ public class BoardPanel extends JPanel {
 	private BoardPanel(Tile[][] boardTiles, int boardSize){
 		this.boardTiles = boardTiles;
 		this.boardSize = boardSize;
-		
 		facade = Facade.getInstance();
-		
-		//PawnPromotionMenu.createPopUpMenu();
 	}
 	
 	public static BoardPanel getInstance(Tile[][] boardTiles, int boardSize) { 
