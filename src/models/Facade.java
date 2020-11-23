@@ -72,15 +72,7 @@ public class Facade {
 	public Boolean getTileHighlighted(Tile t){
 		return t.getHighlighted();
 	}
-	
-	public void setRoqueState(Tile t, Boolean b){
-		t.setRoque(b);
-	}
-	
-	public Boolean getRoqueState(Tile t){
-		return t.getRoque();
-	}
-	
+		
 	public Image getPieceImage(Piece p){
 		return p.getImage();
 	}

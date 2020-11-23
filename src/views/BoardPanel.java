@@ -65,10 +65,6 @@ public class BoardPanel extends JPanel {
 							g2d.setPaint(Color.BLACK);
 						}
 					}
-					
-					if(facade.getRoqueState(tile) == true){
-						g2d.setPaint(Color.YELLOW);
-					}
 				}
 				g2d.fill(tileRect);
 				g2d.draw(tileRect);
