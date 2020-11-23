@@ -86,11 +86,4 @@ public class BoardFrame extends JFrame implements Observer {
 	public int getBoardSize(){
 		return boardSize;
 	}
-
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
 }
