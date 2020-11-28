@@ -41,4 +41,8 @@ public class BoardController {
 		
 		Board.getInstance().nextPlayer();
 	}
+
+	public Tile[][] getBoardTiles(){
+		return facade.getBoardTiles();
+	}
 }
