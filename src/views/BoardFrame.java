@@ -9,6 +9,9 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 
+import controllers.BoardController;
+import controllers.TileController;
+
 import models.Board;
 import models.Facade;
 import models.Tile;
@@ -29,10 +32,8 @@ public class BoardFrame extends JFrame {
 		setSize(boardSize + 3, boardSize + 25);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		facade = Facade.getInstance();
-		
 		BoardFrame.board = board;
-		BoardFrame.boardTiles = facade.getBoardTiles();
+		BoardFrame.boardTiles = BoardController.getInstance().getBoardTiles();
 		boardPanel = BoardPanel.getInstance(boardTiles, boardSize);
 		getContentPane().add(boardPanel);
 		
@@ -57,18 +58,19 @@ public class BoardFrame extends JFrame {
 	     	int column = (int) (clickPoint.getX()/(boardSize/8));
 	     	int row = (int) (clickPoint.getY()/(boardSize/8));
 	    	
-	     	Tile tileClicked = facade.getTile(row, column);
+	     	Tile tileClicked = BoardController.getInstance().getTile(row, column);
 	    	
 	     	if(selectedTile == null) {
-	     		if(facade.getPieceColor(facade.getTilePiece(tileClicked)) == facade.getPlayerTurn()){
-		     		if(facade.getTilePiece(tileClicked) != null){
+				Piece pieceClicked = BoardController.getTilePiece(tileClicked);
+	     		if(facade.getPieceColor(pieceClicked) == facade.getPlayerTurn()){
+		     		if(pieceClicked != null){
 		     			selectedTile = tileClicked;
-		     			facade.getTile(row, column).setSelected(true);
+						TileController.getTile(row, column).setSelected(true);
 		     			possibleMoviments = facade.highlightPossibleMoviments(row, column);
 		     		}
 	     		}
 	     	} else {
-	     		if(selectedTile != facade.getTile(row, column)){
+	     		if(selectedTile != tileClicked){
 	    			
 	     			if(possibleMoviments.contains(tileClicked)){
 	     				facade.updateBoardPieceLocation(selectedTile, tileClicked);

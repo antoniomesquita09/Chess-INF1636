@@ -13,21 +13,19 @@ public class Board {
 		return playerTurn;
 	}
 
-	public void nextPlayer(){
+	public void nextPlayer() {
 		if (playerTurn == PlayerColor.WHITE){
 			playerTurn = PlayerColor.BLACK;
-		} else{
+		} else {
 			playerTurn = PlayerColor.WHITE;
 		}
 	}
 	
-	public Tile[][] getBoardTiles (){
+	public Tile[][] getBoardTiles() {
 		return boardTiles;
 	}
 	
-	private Board(){
-		
-	}
+	private Board(){}
 	
 	public static Board getInstance() {
 		if (singleInstance == null){
@@ -49,7 +47,7 @@ public class Board {
 		}
 	}
 
-	private void initPlayerPieces(){
+	private void initPlayerPieces() {
 		for(int i = 0; i < 8; i++){
 			boardTiles[0][i].setPiece(initFirstRowPiece(i, PlayerColor.BLACK));
 			boardTiles[7][i].setPiece(initFirstRowPiece(i, PlayerColor.WHITE));
@@ -58,19 +56,19 @@ public class Board {
 		}
 	}
 
-	private Piece initFirstRowPiece (int tileIndex, PlayerColor color){
-		if(tileIndex == 0 || tileIndex == 7){
+	private Piece initFirstRowPiece(int tileIndex, PlayerColor color) {
+		if (tileIndex == 0 || tileIndex == 7){
 			return new Rook(color);
-		} else if (tileIndex == 1 || tileIndex == 6){
+		} else if (tileIndex == 1 || tileIndex == 6) {
 			return new Knight(color);
 		}
-		else if (tileIndex == 2 || tileIndex == 5){
+		else if (tileIndex == 2 || tileIndex == 5) {
 			return new Bishop(color);
 		}
-		else if (tileIndex == 3){
+		else if (tileIndex == 3) {
 			return new Queen(color);
 		}
-		else if (tileIndex == 4){
+		else if (tileIndex == 4) {
 			return new King(color);
 		}
 		return null;
