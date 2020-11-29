@@ -62,21 +62,24 @@ public class BoardFrame extends JFrame {
 	    	
 	     	if(selectedTile == null) {
 				Piece pieceClicked = BoardController.getTilePiece(tileClicked);
-	     		if(facade.getPieceColor(pieceClicked) == facade.getPlayerTurn()){
+				PlayerColor pieceColor = PieceController.getInstance().getPieceColor(pieceClicked);
+				PlayerColor playerTurn = PieceController.getPlayerTurn();
+
+	     		if(pieceColor == playerTurn){
 		     		if(pieceClicked != null){
 		     			selectedTile = tileClicked;
-						TileController.getTile(row, column).setSelected(true);
-		     			possibleMoviments = facade.highlightPossibleMoviments(row, column);
+						TileController.getInstance().getTile(row, column).setSelected(true);
+		     			possibleMoviments = BoardController.getInstance().highlightPossibleMoviments(row, column);
 		     		}
 	     		}
 	     	} else {
 	     		if(selectedTile != tileClicked){
 	    			
 	     			if(possibleMoviments.contains(tileClicked)){
-	     				facade.updateBoardPieceLocation(selectedTile, tileClicked);
+						BoardController.updatePieceLocation(selectedTile, tileClicked);
 	     			}
 	    			    			
-	     			facade.setTileSelection(selectedTile, false);
+	     			TileController.setTileSelection(selectedTile, false);
 	     			selectedTile = null;
 	     			possibleMoviments = null;
 	     		}

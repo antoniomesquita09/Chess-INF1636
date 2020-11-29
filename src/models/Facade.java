@@ -57,7 +57,7 @@ public class Facade {
 		BoardController.getInstance().updatePieceLocation(firstTile, secondTile);
 	}
 	
-	public void setTileSelection(Tile t, Boolean b){
+	public void setTileSelection(Tile t, Boolean b) {
 		t.setSelected(b);
 	}
 	

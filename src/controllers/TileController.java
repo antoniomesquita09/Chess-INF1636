@@ -12,22 +12,26 @@ public class TileController {
 	Facade facade;
 	
 	public static TileController getInstance() {
-		if (singleInstance == null){
+		if (singleInstance == null) {
 			singleInstance = new TileController();
 			singleInstance.facade = Facade.getInstance();
 		}
 		return singleInstance;
 	}
 	
-	public Tile getTile(int row, int column){
+	public Tile getTile(int row, int column) {
 		return facade.getTile(row, column);
 	}
 	
-	public Tile[][] getBoardTiles(){
+	public Tile[][] getBoardTiles() {
 		return facade.getBoardTiles();
 	}
 
-	public Piece getTilePiece(Tile tile){
+	public Piece getTilePiece(Tile tile) {
 		return facade.getTilePiece(tile);
+	}
+
+	public void setTileSelection(Tile t, Boolean b) {
+		return facade.setTileSelection(t, b);
 	}
 }
