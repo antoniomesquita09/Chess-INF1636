@@ -32,6 +32,18 @@ public class TileController {
 	}
 
 	public void setTileSelection(Tile t, Boolean b) {
-		return facade.setTileSelection(t, b);
+		facade.setTileSelection(t, b);
+	}
+
+	public Boolean getTileSelection(Tile t) {
+		return facade.getTileSelection(t);
+	}
+
+	public Boolean getTileHighlighted(Tile t) {
+		return facade.getTileHighlighted(t);
+	}
+
+	public void setTileHighlighted(Tile tile, Boolean state) {
+		facade.setTileHighlighted(tile, state);
 	}
 }

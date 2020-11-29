@@ -26,4 +26,8 @@ public class PieceController {
     public PlayerColor getPlayerTurn() {
         return facade.getPlayerTurn();
     }
+
+    public Image getPieceImage(Piece p) {
+        return facade.getPieceImage(p);
+    }
 }

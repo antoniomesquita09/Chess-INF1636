@@ -12,27 +12,25 @@ import javax.swing.JPopupMenu;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
-import models.Facade;
-import models.Piece;
-import models.Tile;
+import controllers.TileController;
+import controllers.PieceController;
+
 import models.TileInterface;
 
 public class BoardPanel extends JPanel {
 	
 	Tile[][] boardTiles;
 	int boardSize;
-	Facade facade;
 	
 	private static BoardPanel singleInstance = null;
 	
 	private BoardPanel(Tile[][] boardTiles, int boardSize){
 		this.boardTiles = boardTiles;
 		this.boardSize = boardSize;
-		facade = Facade.getInstance();
 	}
 	
 	public static BoardPanel getInstance(Tile[][] boardTiles, int boardSize) { 
-		if(singleInstance == null){
+		if(singleInstance == null) {
 			singleInstance = new BoardPanel(boardTiles, boardSize);
 		}
 		return singleInstance;
@@ -52,12 +50,16 @@ public class BoardPanel extends JPanel {
 				tileInterface = new TileInterface(j * (boardSize/8), i * (boardSize/8), (boardSize/8), (boardSize/8));
 				Rectangle2D tileRect = tileInterface.getSquare();
 				Tile tile = boardTiles[i][j];
-				if (facade.getTileSelection(tile) == true){
+				Boolean tileSelection = TileController.getInstance().getTileSelection(tile);
+				Boolean tileHighlighted = TileController.getTileHighlighted(tile);
+				
+
+				if (tileSelection == true) {
 					g2d.setPaint(Color.CYAN);
 				} else {
-					if (facade.getTileHighlighted(tile) == true){
+					if (tileHighlighted == true) {
 						g2d.setPaint(Color.GREEN);
-						facade.setTileHighlighted(tile, false);
+						TileController.setTileHighlighted(tile, false);
 					} else {
 						if ((i + j) % 2 == 0) {
 							g2d.setPaint(Color.WHITE);
@@ -69,9 +71,11 @@ public class BoardPanel extends JPanel {
 				g2d.fill(tileRect);
 				g2d.draw(tileRect);
 				
-				Piece piece = facade.getTilePiece(tile);
-				if(piece != null){
-					g.drawImage(facade.getPieceImage(piece), j * (boardSize/8) + (boardSize/32), i * (boardSize/8) + (boardSize/32), null);
+				Piece piece = TileController.getTilePiece(tile);
+
+				if(piece != null) {
+					Image pieceImage = PieceController.getInstance().getPieceImage(piece);
+					g.drawImage(pieceImage, j * (boardSize/8) + (boardSize/32), i * (boardSize/8) + (boardSize/32), null);
 				}
 			}
 		}

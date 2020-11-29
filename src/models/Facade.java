@@ -73,7 +73,7 @@ public class Facade {
 		return t.getHighlighted();
 	}
 		
-	public Image getPieceImage(Piece p){
+	public Image getPieceImage(Piece p) {
 		return p.getImage();
 	}
 
