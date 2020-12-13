@@ -56,7 +56,7 @@ public class BoardController {
 
 	public void roque(Tile tileClicked, Tile selectedTile) {
 		if(getRoqueState(tileClicked) == true) {
-			Board.getInstance().getBoard().roque(t1, t2);
+			Board.getInstance().roque(t1, t2);
 		}
 	}
 }

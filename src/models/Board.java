@@ -38,7 +38,7 @@ public class Board {
 		initTiles();
 		initPlayerPieces();
 	}
-		
+
 	public void updatePieceLocation(Tile t1, Tile t2){
 		Piece p = t1.getPiece();
 		p.moved();
