@@ -17,10 +17,11 @@ public class Pawn extends Piece {
 	public List<Tile> getPossibleMoviments(Tile tile) {
 		possibleMoviments = new ArrayList<Tile>();
 		board = Board.getInstance().getBoardTiles();
-				
 		int row = tile.getRow();
 		int column = tile.getColumn();
-		
+		if(row == 0 || row == 7) {
+			return possibleMoviments;	
+		}
 		piece = board[row][column].getPiece();
 		int i = row + 1; 
 		int j = column;

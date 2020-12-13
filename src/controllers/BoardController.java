@@ -22,9 +22,9 @@ public class BoardController {
 	}
 
 	public void initGame() {
-		board = Board.getInstance();
+		Board board = Board.getInstance();
 		board.init();
-		facade.getInstance().initBoardFrame(board);
+		facade.initBoardFrame(board);
 	}
 
 	public List<Tile> highlightPossibleMoviments(int row, int column) {
