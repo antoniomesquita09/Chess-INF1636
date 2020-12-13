@@ -76,4 +76,8 @@ public class Facade {
 	public Image getPieceImage(Piece p) {
 		return p.getImage();
 	}
+	
+	 public void showPawnPromotionMenu(Tile t){
+	       
+	    }
 }

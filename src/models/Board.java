@@ -45,8 +45,8 @@ public class Board {
 		
 		if(p instanceof Pawn){
 			for(int i = 0; i<8; i++){
-				if(t2 == boardMatrix[0][i] || t2 == boardMatrix[7][i]){
-					interfaceFacade.showPawnPromotionMenu(t2);
+				if(t2 == boardTiles[0][i] || t2 == boardTiles[7][i]){
+					facade.showPawnPromotionMenu(t2);
 				}
 			}
 		}
@@ -56,21 +56,21 @@ public class Board {
 		
 		if(pieceThreatensKing(t2) == true){
 			System.out.println("check");
-			if(p.getColor() == PieceColor.WHITE){
-				kingIsChecked = PieceColor.BLACK;
+			if(p.getColor() == PlayerColor.WHITE){
+				kingChecked = PlayerColor.BLACK;
 			}else{
-				kingIsChecked = PieceColor.WHITE;
+				kingChecked = PlayerColor.WHITE;
 			}
 		}
-		nextPlayerTurn();
+		nextPlayer();
 	}
 		
 	public void roque(Tile t1, Tile t2){
 		if(t2.getColumn() == 7){
-			updatePieceLocation(t1, boardMatrix[t1.getRow()][6]);
-			updatePieceLocation(t2, boardMatrix[t1.getRow()][5]);
+			updatePieceLocation(t1, boardTiles[t1.getRow()][6]);
+			updatePieceLocation(t2, boardTiles[t1.getRow()][5]);
 		}
-		nextPlayerTurn();
+		nextPlayer();
 	}
 
 	private void initTiles (){
@@ -107,4 +107,22 @@ public class Board {
 		}
 		return null;
 	}
+	
+    public Boolean pieceThreatensKing(Tile t){
+        List<Tile> movementOptions;
+        
+        if(t.getPiece() != null){
+            movementOptions = t.getPiece().getPossibleMoviments(t);
+            for(Tile tile: movementOptions){
+                if(tile.getPiece() != null){
+                    if(tile.getPiece() instanceof King){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
+
+	

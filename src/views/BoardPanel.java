@@ -44,6 +44,7 @@ public class BoardPanel extends JPanel {
 	}
 	
 	public void paintComponent(Graphics g) {
+		TileController tileController = TileController.getInstance();
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		
@@ -53,8 +54,8 @@ public class BoardPanel extends JPanel {
 				tileInterface = new TileInterface(j * (boardSize/8), i * (boardSize/8), (boardSize/8), (boardSize/8));
 				Rectangle2D tileRect = tileInterface.getSquare();
 				Tile tile = boardTiles[i][j];
-				Boolean tileSelection = TileController.getInstance().getTileSelection(tile);
-				Boolean tileHighlighted = TileController.getTileHighlighted(tile);
+				Boolean tileSelection = tileController.getTileSelection(tile);
+				Boolean tileHighlighted = tileController.getTileHighlighted(tile);
 				
 
 				if (tileSelection == true) {
@@ -62,7 +63,7 @@ public class BoardPanel extends JPanel {
 				} else {
 					if (tileHighlighted == true) {
 						g2d.setPaint(Color.GREEN);
-						TileController.setTileHighlighted(tile, false);
+						tileController.setTileHighlighted(tile, false);
 					} else {
 						if ((i + j) % 2 == 0) {
 							g2d.setPaint(Color.WHITE);
@@ -74,7 +75,7 @@ public class BoardPanel extends JPanel {
 				g2d.fill(tileRect);
 				g2d.draw(tileRect);
 				
-				Piece piece = TileController.getTilePiece(tile);
+				Piece piece = tileController.getTilePiece(tile);
 
 				if(piece != null) {
 					Image pieceImage = PieceController.getInstance().getPieceImage(piece);

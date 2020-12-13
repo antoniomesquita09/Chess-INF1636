@@ -58,14 +58,14 @@ public class BoardFrame extends JFrame {
 	     	int column = (int) (clickPoint.getX()/(boardSize/8));
 	     	int row = (int) (clickPoint.getY()/(boardSize/8));
 
-			Board boardController = BoardController.getInstance();
-			Piece pieceController = PieceController.getInstance();
-			Piece tileController = TileController.getInstance();
+			BoardController boardController = BoardController.getInstance();
+			PieceController pieceController = PieceController.getInstance();
+			TileController tileController = TileController.getInstance();
 	    	
-	     	Tile tileClicked = boardController.getTile(row, column);
+	     	Tile tileClicked = tileController.getTile(row, column);
 	    	
 	     	if(selectedTile == null) {
-				Piece pieceClicked = BoardController.getTilePiece(tileClicked);
+				Piece pieceClicked = tileController.getTilePiece(tileClicked);
 				PlayerColor pieceColor = pieceController.getPieceColor(pieceClicked);
 				PlayerColor playerTurn = pieceController.getPlayerTurn();
 
@@ -80,7 +80,7 @@ public class BoardFrame extends JFrame {
 	     		if(selectedTile != tileClicked){
 	    			
 	     			if(possibleMoviments.contains(tileClicked)){
-						BoardController.updatePieceLocation(selectedTile, tileClicked);
+						boardController.updatePieceLocation(selectedTile, tileClicked);
 	     			}
 
 					boardController.roque(tileClicked, selectedTile);
@@ -90,7 +90,7 @@ public class BoardFrame extends JFrame {
 	    			boardController.setRoqueState(tileController.getTile(0, 7), false);
 	    			boardController.setRoqueState(tileController.getTile(7, 7), false);
 	    			    			
-	     			TileController.setTileSelection(selectedTile, false);
+	     			tileController.setTileSelection(selectedTile, false);
 	     			selectedTile = null;
 	     			possibleMoviments = null;
 	     		}
