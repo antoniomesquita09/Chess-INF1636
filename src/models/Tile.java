@@ -6,6 +6,7 @@ public class Tile {
 	private Boolean highlighted = false;
 	private int row;
 	private int column;
+	private Boolean roque = false;
 	
 	Tile(int row, int column){
 		this.row = row;
@@ -43,5 +44,13 @@ public class Tile {
 	
 	public int getColumn(){
 		return column;
+	}
+
+	public void setRoque(Boolean b){
+		roque = b;
+	}
+	
+	public Boolean getRoque(){
+		return roque;
 	}
 }

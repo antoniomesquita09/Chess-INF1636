@@ -74,6 +74,15 @@ public class BoardFrame extends JFrame {
 	     			if(possibleMoviments.contains(tileClicked)){
 						BoardController.updatePieceLocation(selectedTile, tileClicked);
 	     			}
+
+					 if(interfaceFacade.getRoqueState(tileClicked) == true){
+	    				interfaceFacade.Roque(selectedTile, tileClicked);
+	    			}
+	    			
+	    			interfaceFacade.setRoqueState(interfaceFacade.getTile(0, 0), false);
+	    			interfaceFacade.setRoqueState(interfaceFacade.getTile(7, 0), false);
+	    			interfaceFacade.setRoqueState(interfaceFacade.getTile(0, 7), false);
+	    			interfaceFacade.setRoqueState(interfaceFacade.getTile(7, 7), false);
 	    			    			
 	     			TileController.setTileSelection(selectedTile, false);
 	     			selectedTile = null;
