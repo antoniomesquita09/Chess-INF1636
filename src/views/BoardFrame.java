@@ -78,7 +78,7 @@ public class BoardFrame extends JFrame {
 	     		}
 	     	} else {
 	     		if(selectedTile != tileClicked){
-	    			
+
 	     			if(possibleMoviments.contains(tileClicked)){
 						boardController.updatePieceLocation(selectedTile, tileClicked);
 	     			}
@@ -89,7 +89,7 @@ public class BoardFrame extends JFrame {
 	    			boardController.setRoqueState(tileController.getTile(7, 0), false);
 	    			boardController.setRoqueState(tileController.getTile(0, 7), false);
 	    			boardController.setRoqueState(tileController.getTile(7, 7), false);
-	    			    			
+
 	     			tileController.setTileSelection(selectedTile, false);
 	     			selectedTile = null;
 	     			possibleMoviments = null;

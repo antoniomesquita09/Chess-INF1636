@@ -9,6 +9,9 @@ import models.Piece;
 import models.PlayerColor;
 import models.Tile;
 
+import views.StartMenu;
+import views.BoardFrame;
+
 public class BoardController {
 	private static BoardController singleInstance = null;
 	Facade facade;
@@ -23,8 +26,10 @@ public class BoardController {
 
 	public void initGame() {
 		Board board = Board.getInstance();
+		BoardFrame boardFrame = BoardFrame.getInstance();
 		board.init();
 		facade.initBoardFrame(board);
+		StartMenu.showMenu(boardFrame.getBoardDimension());
 	}
 
 	public List<Tile> highlightPossibleMoviments(int row, int column) {

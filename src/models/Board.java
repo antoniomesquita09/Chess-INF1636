@@ -24,9 +24,7 @@ public class Board {
 	public Tile[][] getBoardTiles() {
 		return boardTiles;
 	}
-	
-	private Board(){}
-	
+
 	public static Board getInstance() {
 		if (singleInstance == null){
 			singleInstance = new Board();

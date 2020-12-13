@@ -41,6 +41,7 @@ public class PawnPromotionMenu {
 				BoardPanel.getInstance().repaint();
 			}
 		});
+
 		JMenuItem bishopItem = new JMenuItem("Bishop");
 		bishopItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -48,6 +49,7 @@ public class PawnPromotionMenu {
 				BoardPanel.getInstance().repaint();
 			}
 		});
+
 		JMenuItem knightItem = new JMenuItem("Knight");
 		knightItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
