@@ -54,7 +54,7 @@ public class Knight extends Piece {
 					for(Tile t: tiles){
 						if(t.getPiece() != null && !(t.getPiece() instanceof King)){
 							if(t.getPiece().getColor() != piece.getColor()){
-								if(Board.getInstance().pieceThreatensKing(tile)){
+								if(Board.getInstance().pieceThreatensKing(t)){
 									board[i][j].setPiece(temp);
 									board[row][column].setPiece(piece);
 									return;

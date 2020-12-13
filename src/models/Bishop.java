@@ -61,9 +61,9 @@ public class Bishop extends Piece {
 			
 			for(Tile[] tiles: board){
 				for(Tile t: tiles){
-					if(tile.getPiece() != null && !(tile.getPiece() instanceof King)){
-						if(tile.getPiece().getColor() != piece.getColor()){
-							if(Board.getInstance().pieceThreatensKing(tile)){
+					if(t.getPiece() != null && !(t.getPiece() instanceof King)){
+						if(t.getPiece().getColor() != piece.getColor()){
+							if(Board.getInstance().pieceThreatensKing(t)){
 								board[i][j].setPiece(temp);
 								board[row][column].setPiece(piece);
 								if(temp != null){

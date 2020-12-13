@@ -26,10 +26,11 @@ public class BoardController {
 
 	public void initGame() {
 		Board board = Board.getInstance();
-		BoardFrame boardFrame = BoardFrame.getInstance();
+		BoardFrame boardFrame = BoardFrame.getInstance(board);
 		board.init();
 		facade.initBoardFrame(board);
-		StartMenu.showMenu(boardFrame.getBoardDimension());
+		StartMenu.createPopUpMenu();
+		StartMenu.showMenu(boardFrame.getBoardSize());
 	}
 
 	public List<Tile> highlightPossibleMoviments(int row, int column) {
