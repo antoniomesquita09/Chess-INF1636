@@ -11,6 +11,10 @@ import javax.swing.JFrame;
 
 import controllers.BoardController;
 import controllers.TileController;
+import models.Board;
+import models.Piece;
+import models.PlayerColor;
+import models.Tile;
 import controllers.PieceController;
 
 public class BoardFrame extends JFrame {

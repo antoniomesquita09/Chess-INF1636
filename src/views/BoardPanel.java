@@ -1,7 +1,9 @@
 package views;
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
@@ -14,7 +16,8 @@ import javax.swing.event.PopupMenuListener;
 
 import controllers.TileController;
 import controllers.PieceController;
-
+import models.Piece;
+import models.Tile;
 import models.TileInterface;
 
 public class BoardPanel extends JPanel {

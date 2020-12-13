@@ -76,7 +76,6 @@ public class Facade {
 	public Image getPieceImage(Piece p) {
 		return p.getImage();
 	}
-
 	
 	public void setRoqueState(Tile t, Boolean b){
 		t.setRoque(b);

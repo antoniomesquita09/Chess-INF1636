@@ -1,10 +1,12 @@
 package controllers;
 
+import java.awt.Image;
 import java.util.List;
 
 import models.Board;
 import models.Facade;
 import models.Piece;
+import models.PlayerColor;
 import models.Tile;
 
 public class PieceController {
