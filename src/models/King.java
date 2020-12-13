@@ -20,7 +20,8 @@ public class King extends Piece {
 	
 	public List<Tile> getPossibleMoviments(Tile tile) {
 		possibleMoviments = new ArrayList<Tile>();
-		board = Board.getInstance().getBoardTiles();
+		Board boardInstance = Board.getInstance();
+		board = boardInstance.getBoardTiles();
 		
 		int row = tile.getRow();
 		int column = tile.getColumn();
@@ -43,12 +44,32 @@ public class King extends Piece {
 			y=y*(-1);
 		}
 		
+		i = row; j = column + 3;
+		if(boardInstance.getKingChecked() != piece.getColor()){
+			if(boardInstance.getPlayerTurn() == piece.getColor()){
+				if(i>=0 && i<=7 && j>=0 && j<=7){
+					if(board[i][j].getPiece() != null){
+						if(piece.getMovedState() == false && board[i][j].getPiece().getMovedState() == false){
+							board[i][j].setRoque(true);
+							for(int x = j-1; x>column; x--){
+								if(board[i][x].getPiece() != null){
+									board[i][j].setRoque(false);
+								}
+							}
+						}else{
+							board[i][j].setRoque(false);
+						}
+					}
+				}
+			}
+		}
+		
 		return possibleMoviments;
 	}
 	
 	private void addPossibleMoviment(int i, int j, int row, int column){
-		Tile tile = board[i][j];
 		if(i >= 0 && i <= 7 && j >= 0 && j <= 7){
+				Tile tile = board[i][j];
 				temp = tile.getPiece();
 				tile.setPiece(new Pawn(this.piece.getColor()));
 				board[row][column].setPiece(null);

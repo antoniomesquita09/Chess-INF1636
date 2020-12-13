@@ -78,6 +78,6 @@ public class Facade {
 	}
 	
 	 public void showPawnPromotionMenu(Tile t){
-	       
-	    }
+		 PawnPromotionMenu.showMenu(t, boardFrame.getBoardSize());
+	 }
 }

@@ -4,7 +4,9 @@ import java.util.List;
 
 import models.Board;
 import models.Facade;
+import models.Pawn;
 import models.Piece;
+import models.PlayerColor;
 import models.Tile;
 
 public class BoardController {
@@ -35,9 +37,26 @@ public class BoardController {
 	public void updatePieceLocation(Tile origin, Tile target){
 		Piece piece = origin.getPiece();
 		piece.moved();
+		
+		if(piece instanceof Pawn){
+			for(int i = 0; i<8; i++){
+				if(target == facade.getBoardTiles()[0][i] || target == facade.getBoardTiles()[7][i]){
+					facade.showPawnPromotionMenu(target);
+				}
+			}
+		}
 				
 		target.setPiece(piece);
 		origin.setPiece(null);
+		
+		if(Board.getInstance().pieceThreatensKing(target) == true){
+			System.out.println("check");
+			if(piece.getColor() == PlayerColor.WHITE){
+				setKingChecked(PlayerColor.BLACK);
+			}else{
+				setKingChecked(PlayerColor.WHITE);
+			}
+		}
 		
 		Board.getInstance().nextPlayer();
 	}
@@ -52,6 +71,10 @@ public class BoardController {
 	
 	public Boolean getRoqueState(Tile t){
 		return t.getRoque();
+	}
+	
+	public void setKingChecked(PlayerColor playerColor){
+		Board.getInstance().setKingChecked(playerColor);
 	}
 
 	public void roque(Tile tileClicked, Tile selectedTile) {

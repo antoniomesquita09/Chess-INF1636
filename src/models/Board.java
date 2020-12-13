@@ -123,6 +123,14 @@ public class Board {
         }
         return false;
     }
+    
+    public PlayerColor getKingChecked(){
+		return kingChecked;
+	}
+	
+	public void setKingChecked(PlayerColor playerColor){
+		kingChecked = playerColor;
+	}
 }
 
 	

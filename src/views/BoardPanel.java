@@ -16,6 +16,7 @@ import javax.swing.event.PopupMenuListener;
 
 import controllers.TileController;
 import controllers.PieceController;
+import models.PawnPromotionMenu;
 import models.Piece;
 import models.Tile;
 import models.TileInterface;
@@ -30,6 +31,8 @@ public class BoardPanel extends JPanel {
 	private BoardPanel(Tile[][] boardTiles, int boardSize){
 		this.boardTiles = boardTiles;
 		this.boardSize = boardSize;
+		
+		PawnPromotionMenu.createPopUpMenu();
 	}
 	
 	public static BoardPanel getInstance(Tile[][] boardTiles, int boardSize) { 

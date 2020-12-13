@@ -43,9 +43,8 @@ public class Knight extends Piece {
 	}
 	
 	private void addPossibleMoviment(int i, int j, int row, int column){
-		Tile tile = board[i][j];
 		if(i>=0 && i<=7 && j>=0 && j<=7){
-			
+			Tile tile = board[i][j];
 			if(Board.getInstance().getPlayerTurn() == piece.getColor()){
 				temp = tile.getPiece();
 				tile.setPiece(piece);
