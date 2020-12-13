@@ -8,6 +8,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import controllers.BoardController;
 import views.BoardPanel;
 
 public class StartMenu {

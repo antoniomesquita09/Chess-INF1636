@@ -95,6 +95,6 @@ public class BoardController {
 	}
 
 	public void newGame() {
-		board.initNewGame();
+		Board.getInstance().initNewGame();
 	}
 }
