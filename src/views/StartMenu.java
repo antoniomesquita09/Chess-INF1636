@@ -33,7 +33,7 @@ public class StartMenu {
 		JMenuItem newGame = new JMenuItem("New Game");
 		newGame.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// TODO: new game
+				BoardController.getInstance().newGame();
 			}
 		});
 		
