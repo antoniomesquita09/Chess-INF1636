@@ -32,7 +32,7 @@ public class Board {
 		return singleInstance;
 	}
 
-	public void init(){
+	public void initNewGame(){
 		initTiles();
 		initPlayerPieces();
 	}

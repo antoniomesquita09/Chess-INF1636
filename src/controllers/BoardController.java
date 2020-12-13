@@ -27,7 +27,6 @@ public class BoardController {
 	public void initGame() {
 		Board board = Board.getInstance();
 		BoardFrame boardFrame = BoardFrame.getInstance(board);
-		board.init();
 		facade.initBoardFrame(board);
 		StartMenu.createPopUpMenu();
 		StartMenu.showMenu(boardFrame.getBoardSize());
@@ -93,5 +92,9 @@ public class BoardController {
 		if(getRoqueState(tileClicked) == true) {
 			Board.getInstance().roque(selectedTile, tileClicked);
 		}
+	}
+
+	public void newGame() {
+		board.initNewGame();
 	}
 }
