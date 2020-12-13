@@ -58,6 +58,24 @@ public class Rook extends Piece {
 			temp = tile.getPiece();
 			tile.setPiece(piece);
 			board[row][column].setPiece(null);
+			
+			for(Tile[] tiles: board){
+				for(Tile t: tiles){
+					if(t.getPiece() != null && !(t.getPiece() instanceof King)){
+						if(t.getPiece().getColor() != piece.getColor()){
+							if(Board.getInstance().pieceThreatensKing(t)){
+								board[i][j].setPiece(temp);
+								board[row][column].setPiece(piece);
+								if(temp != null){
+									return 0; //break here
+								}
+								return 1;
+							}
+						}
+					}
+				}
+			}
+			
 			tile.setPiece(temp);
 			board[row][column].setPiece(piece);
 		}

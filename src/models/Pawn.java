@@ -69,7 +69,22 @@ public class Pawn extends Piece {
 		if(playerColor == piece.getColor()){
 			temp = tile.getPiece();
 			tile.setPiece(piece);
-			board[row][column].setPiece(null);		
+			board[row][column].setPiece(null);
+			
+			for(Tile[] tiles: board){
+				for(Tile t: tiles){
+					if(t.getPiece() != null && !(t.getPiece() instanceof King)){
+						if(t.getPiece().getColor() != piece.getColor()){
+							if(Board.getInstance().pieceThreatensKing(t)){
+								board[i][j].setPiece(temp);
+								board[row][column].setPiece(piece);
+								return;
+							}
+						}
+					}
+				}
+			}
+			
 			tile.setPiece(temp);
 			board[row][column].setPiece(piece);
 		}
