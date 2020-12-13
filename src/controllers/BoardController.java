@@ -21,6 +21,12 @@ public class BoardController {
 		return singleInstance;
 	}
 
+	public void initGame() {
+		board = Board.getInstance();
+		board.init();
+		facade.getInstance().initBoardFrame(board);
+	}
+
 	public List<Tile> highlightPossibleMoviments(int row, int column) {
 		List<Tile> possibleMoviments;
 		Tile tile = facade.getBoardTiles()[row][column];
