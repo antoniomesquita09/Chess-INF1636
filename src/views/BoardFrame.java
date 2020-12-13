@@ -57,19 +57,23 @@ public class BoardFrame extends JFrame {
 	    	
 	     	int column = (int) (clickPoint.getX()/(boardSize/8));
 	     	int row = (int) (clickPoint.getY()/(boardSize/8));
+
+			Board boardController = BoardController.getInstance();
+			Piece pieceController = PieceController.getInstance();
+			Piece tileController = TileController.getInstance();
 	    	
-	     	Tile tileClicked = BoardController.getInstance().getTile(row, column);
+	     	Tile tileClicked = boardController.getTile(row, column);
 	    	
 	     	if(selectedTile == null) {
 				Piece pieceClicked = BoardController.getTilePiece(tileClicked);
-				PlayerColor pieceColor = PieceController.getInstance().getPieceColor(pieceClicked);
-				PlayerColor playerTurn = PieceController.getPlayerTurn();
+				PlayerColor pieceColor = pieceController.getPieceColor(pieceClicked);
+				PlayerColor playerTurn = pieceController.getPlayerTurn();
 
 	     		if(pieceColor == playerTurn){
 		     		if(pieceClicked != null){
 		     			selectedTile = tileClicked;
-						TileController.getInstance().getTile(row, column).setSelected(true);
-		     			possibleMoviments = BoardController.getInstance().highlightPossibleMoviments(row, column);
+						tileController.getTile(row, column).setSelected(true);
+		     			possibleMoviments = boardController.highlightPossibleMoviments(row, column);
 		     		}
 	     		}
 	     	} else {
@@ -79,14 +83,12 @@ public class BoardFrame extends JFrame {
 						BoardController.updatePieceLocation(selectedTile, tileClicked);
 	     			}
 
-					 if(interfaceFacade.getRoqueState(tileClicked) == true){
-	    				interfaceFacade.Roque(selectedTile, tileClicked);
-	    			}
-	    			
-	    			interfaceFacade.setRoqueState(interfaceFacade.getTile(0, 0), false);
-	    			interfaceFacade.setRoqueState(interfaceFacade.getTile(7, 0), false);
-	    			interfaceFacade.setRoqueState(interfaceFacade.getTile(0, 7), false);
-	    			interfaceFacade.setRoqueState(interfaceFacade.getTile(7, 7), false);
+					boardController.roque(tileClicked, selectedTile);
+
+		    		boardController.setRoqueState(tileController.getTile(0, 0), false);
+	    			boardController.setRoqueState(tileController.getTile(7, 0), false);
+	    			boardController.setRoqueState(tileController.getTile(0, 7), false);
+	    			boardController.setRoqueState(tileController.getTile(7, 7), false);
 	    			    			
 	     			TileController.setTileSelection(selectedTile, false);
 	     			selectedTile = null;

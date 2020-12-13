@@ -38,6 +38,40 @@ public class Board {
 		initTiles();
 		initPlayerPieces();
 	}
+		
+	public void updatePieceLocation(Tile t1, Tile t2){
+		Piece p = t1.getPiece();
+		p.moved();
+		
+		if(p instanceof Pawn){
+			for(int i = 0; i<8; i++){
+				if(t2 == boardMatrix[0][i] || t2 == boardMatrix[7][i]){
+					interfaceFacade.showPawnPromotionMenu(t2);
+				}
+			}
+		}
+		
+		t2.setPiece(p);
+		t1.setPiece(null);
+		
+		if(pieceThreatensKing(t2) == true){
+			System.out.println("check");
+			if(p.getColor() == PieceColor.WHITE){
+				kingIsChecked = PieceColor.BLACK;
+			}else{
+				kingIsChecked = PieceColor.WHITE;
+			}
+		}
+		nextPlayerTurn();
+	}
+		
+	public void roque(Tile t1, Tile t2){
+		if(t2.getColumn() == 7){
+			updatePieceLocation(t1, boardMatrix[t1.getRow()][6]);
+			updatePieceLocation(t2, boardMatrix[t1.getRow()][5]);
+		}
+		nextPlayerTurn();
+	}
 
 	private void initTiles (){
 		for(int i = 0; i < 8; i++){

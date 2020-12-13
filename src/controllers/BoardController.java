@@ -45,4 +45,18 @@ public class BoardController {
 	public Tile[][] getBoardTiles(){
 		return facade.getBoardTiles();
 	}
+
+	public void setRoqueState(Tile t, Boolean b){
+		t.setRoque(b);
+	}
+	
+	public Boolean getRoqueState(Tile t){
+		return t.getRoque();
+	}
+
+	public void roque(Tile tileClicked, Tile selectedTile) {
+		if(getRoqueState(tileClicked) == true) {
+			Board.getInstance().getBoard().roque(t1, t2);
+		}
+	}
 }
