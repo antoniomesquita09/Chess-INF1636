@@ -97,4 +97,7 @@ public class BoardController {
 	public void newGame() {
 		Board.getInstance().initNewGame();
 	}
+
+	public void resumeGame() {
+	}
 }

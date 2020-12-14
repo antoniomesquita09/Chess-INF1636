@@ -31,6 +31,7 @@ public class StartMenu {
                 // TODO: resume game
 			}
 		});
+
 		JMenuItem newGame = new JMenuItem("New Game");
 		newGame.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {

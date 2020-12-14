@@ -1,5 +1,7 @@
 package models;
 
+import java.io.FileWriter;
+
 import java.util.List;
 
 public class Board {
@@ -129,6 +131,73 @@ public class Board {
 	public void setKingChecked(PlayerColor playerColor){
 		kingChecked = playerColor;
 	}
-}
 
-	
+	private void saveGame() {
+		try {
+			FileWriter file = new File("filename.txt");
+
+			for(int i = 0; i < 8; i++) {
+				for(int j = 0; j < 8; j++) {
+					Piece currentPiece = boardTiles[i][j];
+					if (currentPiece.getPiece() instanceof Pawn) {
+						if(currentPiece.color == PlayerColor.WHITE) {
+							file.write("P");
+						} else {
+							file.write("p");
+						}
+					}
+					else if (currentPiece.getPiece() instanceof Bishop) {
+						if(currentPiece.color == PlayerColor.WHITE) {
+							file.write("B");
+						} else {
+							file.write("b");
+						}
+					}
+					else if (currentPiece.getPiece() instanceof Knight) {
+						if(currentPiece.color == PlayerColor.WHITE) {
+							file.write("K");
+						} else {
+							file.write("k");
+						}
+					}
+					else if (currentPiece.getPiece() instanceof Rook) {
+						if(currentPiece.color == PlayerColor.WHITE) {
+							file.write("R");
+						} else {
+							file.write("r");
+						}
+					}
+					else if (currentPiece.getPiece() instanceof Queen) {
+						if(currentPiece.color == PlayerColor.WHITE) {
+							file.write("Q");
+						} else {
+							file.write("q");
+						}
+					}
+					else if (currentPiece.getPiece() instanceof King) {
+						if(currentPiece.color == PlayerColor.WHITE) {
+							file.write("K");
+						} else {
+							file.write("k");
+						}
+					}
+					else {
+						file.write("-");
+					}
+
+					if (j != 7) {
+						file.write(";");
+					} else {
+						file.write("\n");
+					}
+				}
+			}
+
+		file.close()
+
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+}
