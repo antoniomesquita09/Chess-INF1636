@@ -100,4 +100,8 @@ public class BoardController {
 
 	public void resumeGame() {
 	}
+
+	public void saveGame() {
+		facade.saveGame();
+	}	
 }

@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+import javax.swing.JMenu;
 
 import controllers.TileController;
 import controllers.PieceController;
@@ -31,6 +32,21 @@ public class BoardPanel extends JPanel {
 	private BoardPanel(Tile[][] boardTiles, int boardSize){
 		this.boardTiles = boardTiles;
 		this.boardSize = boardSize;
+
+		BoardController boardController = BoardController.getInstance();
+
+		JMenuBar menuBar = new JMenuBar();
+		JMenu fileMenu = new JMenu("File");
+
+		JMenuItem saveAction = new JMenuItem("Save");
+
+		saveAction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boardController.saveGame();
+            }
+        });
+
+		fileMenu.add(saveAction)
 		
 		PawnPromotionMenu.createPopUpMenu();
 	}

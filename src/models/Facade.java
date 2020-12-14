@@ -77,7 +77,11 @@ public class Facade {
 		return p.getImage();
 	}
 	
-	 public void showPawnPromotionMenu(Tile t){
-		 PawnPromotionMenu.showMenu(t, boardFrame.getBoardSize());
-	 }
+	public void showPawnPromotionMenu(Tile t){
+		PawnPromotionMenu.showMenu(t, boardFrame.getBoardSize());
+	}
+	
+	public void saveGame() {
+		Board.getInstance().saveGame();
+	}
 }
