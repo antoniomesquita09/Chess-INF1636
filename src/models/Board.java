@@ -195,7 +195,7 @@ public class Board {
 				}
 			}
 
-		file.write(PlayerColor.WHITE);
+		file.write(playerTurn == PlayerColor.WHITE?"WHITE":"BLACK");
 		file.write("\n");
 		file.close();
 
@@ -209,59 +209,62 @@ public class Board {
 		initTiles();
 		try {
 			Scanner line = new Scanner(file);
-			while(line.hasNextLine()) {
+			for(int i = 0; i < 8; i++) {
 				String lineData = line.nextLine();
+				
 				String[] pieceChar = lineData.split(";");
-				for(int i = 0; i < 8; i++) {
-					if(pieceChar == "P") {
-						new Pawn(PlayerColor.WHITE);
+				for(int j = 0; j < 8; j++) {
+					
+					if(pieceChar[j].equals("P") ) {
+						boardTiles[i][j].setPiece(new Pawn(PlayerColor.WHITE));
 					}
-					else if(pieceChar == "p") {
-						new Pawn(PlayerColor.BLACK);
+					else if(pieceChar[j].equals("p")) {
+						boardTiles[i][j].setPiece(new Pawn(PlayerColor.BLACK));
 					}
-					else if(pieceChar == "B") {
-						new Bishop(PlayerColor.WHITE);
+					else if(pieceChar[j].equals("B")) {
+						boardTiles[i][j].setPiece(new Bishop(PlayerColor.WHITE));
 					}
-					else if(pieceChar == "b") {
-						new Bishop(PlayerColor.BLACK);
+					else if(pieceChar[j].equals("b")) {
+						boardTiles[i][j].setPiece(new Bishop(PlayerColor.BLACK));
 					}
-					else if(pieceChar == "K") {
-						new Knight(PlayerColor.WHITE);
+					else if(pieceChar[j].equals("K")) {
+						boardTiles[i][j].setPiece(new Knight(PlayerColor.WHITE));
 					}
-					else if(pieceChar == "k") {
-						new Knight(PlayerColor.BLACK);
+					else if(pieceChar[j].equals("k")) {
+						boardTiles[i][j].setPiece(new Knight(PlayerColor.BLACK));
 					}
-					else if(pieceChar == "R") {
-						new Rook(PlayerColor.WHITE);
+					else if(pieceChar[j].equals("R")) {
+						boardTiles[i][j].setPiece(new Rook(PlayerColor.WHITE));
 					}
-					else if(pieceChar == "r") {
-						new Rook(PlayerColor.BLACK);
+					else if(pieceChar[j].equals("r")) {
+						boardTiles[i][j].setPiece(new Rook(PlayerColor.BLACK));
 					}
-					else if(pieceChar == "Q") {
-						new Queen(PlayerColor.BLACK);
+					else if(pieceChar[j].equals("Q")) {
+						boardTiles[i][j].setPiece(new Queen(PlayerColor.WHITE));
 						
 					}
-					else if(pieceChar == "q") {
-						new Queen(PlayerColor.BLACK);
+					else if(pieceChar[j].equals("q")) {
+						boardTiles[i][j].setPiece(new Queen(PlayerColor.BLACK));
 						
 					}
-					else if(pieceChar == "A") {
-						new King(PlayerColor.BLACK);
+					else if(pieceChar[j].equals("A")) {
+						boardTiles[i][j].setPiece(new King(PlayerColor.WHITE));
 						
 					}
-					else if(pieceChar == "a") {
-						new King(PlayerColor.BLACK);
+					else if(pieceChar[j].equals("a")) {
+						boardTiles[i][j].setPiece(new King(PlayerColor.BLACK));
 					}
-					else if(pieceChar == "BLACK") {
-						playerTurn = PlayerColor.BLACK;
-					}
-					else if(pieceChar == "WHITE") {
-						playerTurn = PlayerColor.WHITE;
-					}
+					
 				}
 			}
-
-		file.close();
+			String currentTurn = line.nextLine();
+			 if(currentTurn.equals("BLACK")) {
+				playerTurn = PlayerColor.BLACK;
+			}
+			else if(currentTurn.equals("WHITE")) {
+				playerTurn = PlayerColor.WHITE;
+			}
+		
 
 		} catch (IOException e) {
 			System.out.println("An error occurred.");

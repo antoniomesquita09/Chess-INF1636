@@ -2,7 +2,9 @@ package views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.event.PopupMenuEvent;
@@ -32,10 +34,10 @@ public class StartMenu {
 				file.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				int i= file.showSaveDialog(null);
 				if (i==1){
-					JtextFieldLocal.setText("");
+					
 				} else {
 					File arquivo = file.getSelectedFile();
-					JtextFieldLocal.setText(arquivo.getPath());
+					
 					BoardController.getInstance().resumeGame(arquivo);
 				}
 			}

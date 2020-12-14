@@ -1,5 +1,6 @@
 package models;
 import java.awt.Image;
+import java.io.File;
 import java.util.List;
 
 import controllers.BoardController;
