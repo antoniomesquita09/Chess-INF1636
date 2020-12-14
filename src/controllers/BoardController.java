@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.File;
 import java.util.List;
 
 import models.Board;
@@ -27,7 +28,6 @@ public class BoardController {
 	public void initGame() {
 		Board board = Board.getInstance();
 		BoardFrame boardFrame = BoardFrame.getInstance(board);
-		board.init();
 		facade.initBoardFrame(board);
 		StartMenu.createPopUpMenu();
 		StartMenu.showMenu(boardFrame.getBoardSize());
@@ -95,4 +95,16 @@ public class BoardController {
 			Board.getInstance().roque(selectedTile, tileClicked);
 		}
 	}
+
+	public void newGame() {
+		Board.getInstance().initNewGame();
+	}
+
+	public void saveGame() {
+		facade.saveGame();
+	}	
+
+	public void resumeGame(File file) {
+		facade.resumeGame(file);
+	}	
 }

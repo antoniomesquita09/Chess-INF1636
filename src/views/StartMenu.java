@@ -2,12 +2,15 @@ package views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import controllers.BoardController;
 import views.BoardPanel;
 
 public class StartMenu {
@@ -27,13 +30,23 @@ public class StartMenu {
 		JMenuItem resumeGame = new JMenuItem("Resume Game");
 		resumeGame.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-                // TODO: resume game
+				JFileChooser file = new JFileChooser();
+				file.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				int i= file.showSaveDialog(null);
+				if (i==1){
+					
+				} else {
+					File arquivo = file.getSelectedFile();
+					
+					BoardController.getInstance().resumeGame(arquivo);
+				}
 			}
 		});
+
 		JMenuItem newGame = new JMenuItem("New Game");
 		newGame.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// TODO: new game
+				BoardController.getInstance().newGame();
 			}
 		});
 		

@@ -1,6 +1,10 @@
 package models;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Board {
 	private static Board singleInstance = null;
@@ -32,7 +36,7 @@ public class Board {
 		return singleInstance;
 	}
 
-	public void init(){
+	public void initNewGame(){
 		initTiles();
 		initPlayerPieces();
 	}
@@ -133,6 +137,142 @@ public class Board {
 	public void setKingChecked(PlayerColor playerColor){
 		kingChecked = playerColor;
 	}
-}
 
-	
+	public void saveGame() {
+		try {
+			FileWriter file = new FileWriter("filename.txt");
+
+			for(int i = 0; i < 8; i++) {
+				for(int j = 0; j < 8; j++) {
+					Piece currentPiece = boardTiles[i][j].getPiece();
+					if (currentPiece instanceof Pawn) {
+						if(currentPiece.getColor() == PlayerColor.WHITE) {
+							file.write("P");
+						} else {
+							file.write("p");
+						}
+					}
+					else if (currentPiece instanceof Bishop) {
+						if(currentPiece.getColor() == PlayerColor.WHITE) {
+							file.write("B");
+						} else {
+							file.write("b");
+						}
+					}
+					else if (currentPiece instanceof Knight) {
+						if(currentPiece.getColor() == PlayerColor.WHITE) {
+							file.write("K");
+						} else {
+							file.write("k");
+						}
+					}
+					else if (currentPiece instanceof Rook) {
+						if(currentPiece.getColor() == PlayerColor.WHITE) {
+							file.write("R");
+						} else {
+							file.write("r");
+						}
+					}
+					else if (currentPiece instanceof Queen) {
+						if(currentPiece.getColor() == PlayerColor.WHITE) {
+							file.write("Q");
+						} else {
+							file.write("q");
+						}
+					}
+					else if (currentPiece instanceof King) {
+						if(currentPiece.getColor() == PlayerColor.WHITE) {
+							file.write("A");
+						} else {
+							file.write("a");
+						}
+					}
+					else {
+						file.write("-");
+					}
+
+					if (j != 7) {
+						file.write(";");
+					} else {
+						file.write("\n");
+					}
+				}
+			}
+
+		file.write(playerTurn == PlayerColor.WHITE?"WHITE":"BLACK");
+		file.write("\n");
+		file.close();
+
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+
+	public void resumeGame(File file) {
+		initTiles();
+		try {
+			Scanner line = new Scanner(file);
+			for(int i = 0; i < 8; i++) {
+				String lineData = line.nextLine();
+				
+				String[] pieceChar = lineData.split(";");
+				for(int j = 0; j < 8; j++) {
+					
+					if(pieceChar[j].equals("P") ) {
+						boardTiles[i][j].setPiece(new Pawn(PlayerColor.WHITE));
+					}
+					else if(pieceChar[j].equals("p")) {
+						boardTiles[i][j].setPiece(new Pawn(PlayerColor.BLACK));
+					}
+					else if(pieceChar[j].equals("B")) {
+						boardTiles[i][j].setPiece(new Bishop(PlayerColor.WHITE));
+					}
+					else if(pieceChar[j].equals("b")) {
+						boardTiles[i][j].setPiece(new Bishop(PlayerColor.BLACK));
+					}
+					else if(pieceChar[j].equals("K")) {
+						boardTiles[i][j].setPiece(new Knight(PlayerColor.WHITE));
+					}
+					else if(pieceChar[j].equals("k")) {
+						boardTiles[i][j].setPiece(new Knight(PlayerColor.BLACK));
+					}
+					else if(pieceChar[j].equals("R")) {
+						boardTiles[i][j].setPiece(new Rook(PlayerColor.WHITE));
+					}
+					else if(pieceChar[j].equals("r")) {
+						boardTiles[i][j].setPiece(new Rook(PlayerColor.BLACK));
+					}
+					else if(pieceChar[j].equals("Q")) {
+						boardTiles[i][j].setPiece(new Queen(PlayerColor.WHITE));
+						
+					}
+					else if(pieceChar[j].equals("q")) {
+						boardTiles[i][j].setPiece(new Queen(PlayerColor.BLACK));
+						
+					}
+					else if(pieceChar[j].equals("A")) {
+						boardTiles[i][j].setPiece(new King(PlayerColor.WHITE));
+						
+					}
+					else if(pieceChar[j].equals("a")) {
+						boardTiles[i][j].setPiece(new King(PlayerColor.BLACK));
+					}
+					
+				}
+			}
+			String currentTurn = line.nextLine();
+			 if(currentTurn.equals("BLACK")) {
+				playerTurn = PlayerColor.BLACK;
+			}
+			else if(currentTurn.equals("WHITE")) {
+				playerTurn = PlayerColor.WHITE;
+			}
+		
+
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+}

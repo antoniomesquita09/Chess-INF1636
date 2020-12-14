@@ -1,5 +1,6 @@
 package models;
 import java.awt.Image;
+import java.io.File;
 import java.util.List;
 
 import controllers.BoardController;
@@ -77,7 +78,15 @@ public class Facade {
 		return p.getImage();
 	}
 	
-	 public void showPawnPromotionMenu(Tile t){
-		 PawnPromotionMenu.showMenu(t, boardFrame.getBoardSize());
-	 }
+	public void showPawnPromotionMenu(Tile t){
+		PawnPromotionMenu.showMenu(t, boardFrame.getBoardSize());
+	}
+	
+	public void saveGame() {
+		Board.getInstance().saveGame();
+	}
+	
+	public void resumeGame(File file) {
+		Board.getInstance().resumeGame(file);
+	}
 }
