@@ -1,7 +1,8 @@
 package models;
 
+import java.io.File;
 import java.io.FileWriter;
-
+import java.io.IOException;
 import java.util.List;
 
 public class Board {
@@ -134,48 +135,48 @@ public class Board {
 
 	private void saveGame() {
 		try {
-			FileWriter file = new File("filename.txt");
+			FileWriter file = new FileWriter("filename.txt");
 
 			for(int i = 0; i < 8; i++) {
 				for(int j = 0; j < 8; j++) {
-					Piece currentPiece = boardTiles[i][j];
-					if (currentPiece.getPiece() instanceof Pawn) {
-						if(currentPiece.color == PlayerColor.WHITE) {
+					Piece currentPiece = boardTiles[i][j].getPiece();
+					if (currentPiece instanceof Pawn) {
+						if(currentPiece.getColor() == PlayerColor.WHITE) {
 							file.write("P");
 						} else {
 							file.write("p");
 						}
 					}
-					else if (currentPiece.getPiece() instanceof Bishop) {
-						if(currentPiece.color == PlayerColor.WHITE) {
+					else if (currentPiece instanceof Bishop) {
+						if(currentPiece.getColor() == PlayerColor.WHITE) {
 							file.write("B");
 						} else {
 							file.write("b");
 						}
 					}
-					else if (currentPiece.getPiece() instanceof Knight) {
-						if(currentPiece.color == PlayerColor.WHITE) {
+					else if (currentPiece instanceof Knight) {
+						if(currentPiece.getColor() == PlayerColor.WHITE) {
 							file.write("K");
 						} else {
 							file.write("k");
 						}
 					}
-					else if (currentPiece.getPiece() instanceof Rook) {
-						if(currentPiece.color == PlayerColor.WHITE) {
+					else if (currentPiece instanceof Rook) {
+						if(currentPiece.getColor() == PlayerColor.WHITE) {
 							file.write("R");
 						} else {
 							file.write("r");
 						}
 					}
-					else if (currentPiece.getPiece() instanceof Queen) {
-						if(currentPiece.color == PlayerColor.WHITE) {
+					else if (currentPiece instanceof Queen) {
+						if(currentPiece.getColor() == PlayerColor.WHITE) {
 							file.write("Q");
 						} else {
 							file.write("q");
 						}
 					}
-					else if (currentPiece.getPiece() instanceof King) {
-						if(currentPiece.color == PlayerColor.WHITE) {
+					else if (currentPiece instanceof King) {
+						if(currentPiece.getColor() == PlayerColor.WHITE) {
 							file.write("K");
 						} else {
 							file.write("k");
@@ -193,7 +194,7 @@ public class Board {
 				}
 			}
 
-		file.close()
+		file.close();
 
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
