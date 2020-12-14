@@ -68,6 +68,10 @@ public class Board {
 			updatePieceLocation(t1, boardTiles[t1.getRow()][6]);
 			updatePieceLocation(t2, boardTiles[t1.getRow()][5]);
 		}
+		else if(t2.getColumn() == 0){
+			updatePieceLocation(t1, boardTiles[t1.getRow()][2]);
+			updatePieceLocation(t2, boardTiles[t1.getRow()][3]);
+		}
 		nextPlayer();
 	}
 

@@ -64,6 +64,26 @@ public class King extends Piece {
 			}
 		}
 		
+		i = row; j = column - 4;
+		if(boardInstance.getKingChecked() != piece.getColor()){
+			if(boardInstance.getPlayerTurn() == piece.getColor()){
+				if(i>=0 && i<=7 && j>=0 && j<=7){
+					if(board[i][j].getPiece() != null){
+						if(piece.getMovedState() == false && board[i][j].getPiece().getMovedState() == false){
+							board[i][j].setRoque(true);
+							for(int x = j+1; x>column; x++){
+								if(board[i][x].getPiece() != null){
+									board[i][j].setRoque(false);
+								}
+							}
+						}else{
+							board[i][j].setRoque(false);
+						}
+					}
+				}
+			}
+		}
+		
 		return possibleMoviments;
 	}
 	

@@ -46,8 +46,8 @@ public class Tile {
 		return column;
 	}
 
-	public void setRoque(Boolean b){
-		roque = b;
+	public void setRoque(Boolean state){
+		roque = state;
 	}
 	
 	public Boolean getRoque(){

@@ -91,6 +91,7 @@ public class BoardController {
 
 	public void roque(Tile tileClicked, Tile selectedTile) {
 		if(getRoqueState(tileClicked) == true) {
+			System.out.println("roque");
 			Board.getInstance().roque(selectedTile, tileClicked);
 		}
 	}
