@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Board {
 	private static Board singleInstance = null;
@@ -177,9 +178,9 @@ public class Board {
 					}
 					else if (currentPiece instanceof King) {
 						if(currentPiece.getColor() == PlayerColor.WHITE) {
-							file.write("K");
+							file.write("A");
 						} else {
-							file.write("k");
+							file.write("a");
 						}
 					}
 					else {
@@ -190,6 +191,72 @@ public class Board {
 						file.write(";");
 					} else {
 						file.write("\n");
+					}
+				}
+			}
+
+		file.write(PlayerColor.WHITE);
+		file.write("\n");
+		file.close();
+
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+
+	public void resumeGame(File file) {
+		initTiles();
+		try {
+			Scanner line = new Scanner(file);
+			while(line.hasNextLine()) {
+				String lineData = line.nextLine();
+				String[] pieceChar = lineData.split(";");
+				for(int i = 0; i < 8; i++) {
+					if(pieceChar == "P") {
+						new Pawn(PlayerColor.WHITE);
+					}
+					else if(pieceChar == "p") {
+						new Pawn(PlayerColor.BLACK);
+					}
+					else if(pieceChar == "B") {
+						new Bishop(PlayerColor.WHITE);
+					}
+					else if(pieceChar == "b") {
+						new Bishop(PlayerColor.BLACK);
+					}
+					else if(pieceChar == "K") {
+						new Knight(PlayerColor.WHITE);
+					}
+					else if(pieceChar == "k") {
+						new Knight(PlayerColor.BLACK);
+					}
+					else if(pieceChar == "R") {
+						new Rook(PlayerColor.WHITE);
+					}
+					else if(pieceChar == "r") {
+						new Rook(PlayerColor.BLACK);
+					}
+					else if(pieceChar == "Q") {
+						new Queen(PlayerColor.BLACK);
+						
+					}
+					else if(pieceChar == "q") {
+						new Queen(PlayerColor.BLACK);
+						
+					}
+					else if(pieceChar == "A") {
+						new King(PlayerColor.BLACK);
+						
+					}
+					else if(pieceChar == "a") {
+						new King(PlayerColor.BLACK);
+					}
+					else if(pieceChar == "BLACK") {
+						playerTurn = PlayerColor.BLACK;
+					}
+					else if(pieceChar == "WHITE") {
+						playerTurn = PlayerColor.WHITE;
 					}
 				}
 			}

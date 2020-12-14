@@ -98,10 +98,11 @@ public class BoardController {
 		Board.getInstance().initNewGame();
 	}
 
-	public void resumeGame() {
-	}
-
 	public void saveGame() {
 		facade.saveGame();
+	}	
+
+	public void resumeGame(File file) {
+		facade.resumeGame(file);
 	}	
 }

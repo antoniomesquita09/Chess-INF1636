@@ -84,4 +84,8 @@ public class Facade {
 	public void saveGame() {
 		Board.getInstance().saveGame();
 	}
+	
+	public void resumeGame(File file) {
+		Board.getInstance().resumeGame(file);
+	}
 }

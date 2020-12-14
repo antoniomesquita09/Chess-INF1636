@@ -28,7 +28,16 @@ public class StartMenu {
 		JMenuItem resumeGame = new JMenuItem("Resume Game");
 		resumeGame.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-                // TODO: resume game
+				JFileChooser file = new JFileChooser();
+				file.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				int i= file.showSaveDialog(null);
+				if (i==1){
+					JtextFieldLocal.setText("");
+				} else {
+					File arquivo = file.getSelectedFile();
+					JtextFieldLocal.setText(arquivo.getPath());
+					BoardController.getInstance().resumeGame(arquivo);
+				}
 			}
 		});
 
