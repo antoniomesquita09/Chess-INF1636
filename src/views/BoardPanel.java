@@ -4,16 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.geom.Rectangle2D;
 
-import javax.swing.JMenuItem;
+
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-import javax.swing.JMenu;
+
 
 import controllers.TileController;
 import controllers.PieceController;
@@ -33,20 +29,7 @@ public class BoardPanel extends JPanel {
 		this.boardTiles = boardTiles;
 		this.boardSize = boardSize;
 
-		BoardController boardController = BoardController.getInstance();
-
-		JMenuBar menuBar = new JMenuBar();
-		JMenu fileMenu = new JMenu("File");
-
-		JMenuItem saveAction = new JMenuItem("Save");
-
-		saveAction.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boardController.saveGame();
-            }
-        });
-
-		fileMenu.add(saveAction)
+		
 		
 		PawnPromotionMenu.createPopUpMenu();
 	}

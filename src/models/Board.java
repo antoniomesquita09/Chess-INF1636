@@ -133,7 +133,7 @@ public class Board {
 		kingChecked = playerColor;
 	}
 
-	private void saveGame() {
+	public void saveGame() {
 		try {
 			FileWriter file = new FileWriter("filename.txt");
 

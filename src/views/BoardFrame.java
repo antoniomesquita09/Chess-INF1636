@@ -8,6 +8,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 import controllers.BoardController;
 import controllers.TileController;
@@ -38,6 +41,29 @@ public class BoardFrame extends JFrame {
 		getContentPane().add(boardPanel);
 		
 		addMouseListener(boardClickHandler);
+		buildMenu();
+		
+		
+		
+	}
+	private JMenuBar buildMenu() {
+		BoardController boardController = BoardController.getInstance();
+
+		JMenuBar menuBar = new JMenuBar();
+		JMenu fileMenu = new JMenu("File");
+		setJMenuBar(menuBar);
+
+		JMenuItem saveAction = new JMenuItem("Save");
+
+		saveAction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boardController.saveGame();
+            }
+        });
+
+		fileMenu.add(saveAction);
+		menuBar.add(fileMenu);
+		return menuBar;
 	}
 
 	
@@ -46,6 +72,7 @@ public class BoardFrame extends JFrame {
 			singleInstance = new BoardFrame(board);
 			singleInstance.setTitle("Chess Game");
 			singleInstance.setVisible(true);
+			
 		}
 		return singleInstance;
 	}
@@ -102,4 +129,5 @@ public class BoardFrame extends JFrame {
 	public int getBoardSize(){
 		return boardSize;
 	}
+	
 }
